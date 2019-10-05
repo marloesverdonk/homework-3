@@ -29,7 +29,6 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <div className="App">
         <header className="App-header">
@@ -83,6 +82,5 @@ const data = [
     origin: "USA"
   }
 ]
-
 
 export default connect(mapStateToProps)(App)
