@@ -2,6 +2,7 @@
 import React from 'react';
 import './App.css';
 import { connect } from 'react-redux'
+import ModelDetails from './ModelDetails'
 
 
 class App extends React.Component {
@@ -42,6 +43,8 @@ class App extends React.Component {
           </select>
 
           <button onClick={this.handleClick}>Add</button>
+
+          <ModelDetails data={this.props.data}/>
         </main>
       </div>
     );
