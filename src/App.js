@@ -2,22 +2,33 @@ import React from 'react';
 import './App.css';
 
 class App extends React.Component {
-  render(){
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Computer Models</h1>
-      </header>
-      <main>
-          <select>
-           <option value="">-- pick a model --</option> 
-  {data.map(model => <option value={model.name}> {model.name} ({model.year}) </option>)}
+  state = {}
+
+  updateSelection = (event) => {
+    this.setState({
+      name: event.target.value
+    })
+  }
+
+  render() {
+    console.log(this.state)
+    return (
+      <div className="App">
+        <header className="App-header">
+          <h1>Computer Models</h1>
+        </header>
+        <main>
+          <select onChange={this.updateSelection}>
+            <option value="" key='pick a model'>-- pick a model --</option>
+            {data.map(model => 
+              <option value={model.name} key={model.name}> {model.name} ({model.year}) </option>)}
           </select>
-      </main>
-    </div>
-  );
+        </main>
+      </div>
+    );
+  }
 }
-}
+
 
 const data = [
   {
@@ -45,16 +56,6 @@ const data = [
     origin: "USA"
   }
 ]
-
-
-
-
-
-
-
-
-
-
 
 
 export default App;
