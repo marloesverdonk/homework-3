@@ -1,5 +1,8 @@
+
 import React from 'react';
 import './App.css';
+import { connect } from 'react-redux'
+
 
 class App extends React.Component {
   state = {}
@@ -7,6 +10,20 @@ class App extends React.Component {
   updateSelection = (event) => {
     this.setState({
       name: event.target.value
+    })
+  }
+
+  handleClick = () => {
+    const model = data.find(model => model.name === this.state.name)
+
+    this.props.dispatch({
+      type: 'ADD_MODEL',
+      payload: {
+        name: model.name,
+        manufacturer: model.manufacturer,
+        year: model.year,
+        origin: model.origin
+      }
     })
   }
 
@@ -18,17 +35,24 @@ class App extends React.Component {
           <h1>Computer Models</h1>
         </header>
         <main>
-          <select onChange={this.updateSelection}>
+          <select onChange={this.updateSelection} >
             <option value="" key='pick a model'>-- pick a model --</option>
-            {data.map(model => 
+            {data.map(model =>
               <option value={model.name} key={model.name}> {model.name} ({model.year}) </option>)}
           </select>
+
+          <button onClick={this.handleClick}>Add</button>
         </main>
       </div>
     );
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    data: state
+  }
+}
 
 const data = [
   {
@@ -58,4 +82,4 @@ const data = [
 ]
 
 
-export default App;
+export default connect(mapStateToProps)(App)
